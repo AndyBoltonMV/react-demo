@@ -1,30 +1,50 @@
 import { useState } from "react";
-import CountDisplay from "./components/CountDisplay";
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [username, setUsername] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
 
-  // function useState(initialVal) {
-
-  //   let state = initialVal || undefined;
-
-  //   function setState(newVal) {
-  //     state = newVal
-  //   }
-
-  //   return [state, setState];
-  // }
+  function submitHandler(event) {
+    event.preventDefault();
+    const obj = {
+      username,
+      email,
+      password,
+    };
+    console.log(obj);
+    setUsername();
+    setEmail();
+    setPassword();
+  }
 
   return (
-    <div className="App">
-      <h1>State Demo</h1>
-      <CountDisplay count={count} setCount={setCount} />
-      <button onClick={() => setCount(count - 1)}>Decrement</button>
-      <button onClick={() => setCount(count + 1)}>Increment</button>
-      {count === 3 && <p>The number is three</p>}
-      {/* {count === 5 ? <p>The number is 5</p> : <p>This number isn't 5</p>} */}
-      <p>{count === 5 ? "The number is 5" : "This number isn't 5"}</p>
+    <div
+      className="App"
+      // onContextMenu={(e) => {
+      //   e.preventDefault();
+      //   console.log("look here");
+      // }}
+    >
+      <h1>Event Demo</h1>
+      <form onSubmit={submitHandler}>
+        <input
+          onChange={(event) => setUsername(event.target.value)}
+          placeholder="Username"
+        />
+        <input
+          onChange={(event) => setEmail(event.target.value)}
+          placeholder="Email"
+          type="email"
+        />
+        <input
+          onChange={(event) => setPassword(event.target.value)}
+          placeholder="Password"
+          type="password"
+        />
+        <button type="submit">Submit</button>
+      </form>
     </div>
   );
 }
